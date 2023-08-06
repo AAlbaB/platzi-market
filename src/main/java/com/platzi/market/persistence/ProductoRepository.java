@@ -5,6 +5,7 @@ import com.platzi.market.domain.repository.ProductRepository;
 import com.platzi.market.persistence.crud.ProductoCrudRepository;
 import com.platzi.market.persistence.entity.Producto;
 import com.platzi.market.persistence.mapper.ProductMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,11 @@ import java.util.Optional;
 
 @Repository
 public class ProductoRepository implements ProductRepository {
+
+    @Autowired
     private ProductoCrudRepository productoCrudRepository;
+
+    @Autowired
     private ProductMapper mapper;
 
     @Override
@@ -34,9 +39,9 @@ public class ProductoRepository implements ProductRepository {
     }
     /*Se utilizó lo anterior en el return debido a que no tenemos ningún mapeador que convierta una lista de opcionales:
     - Se mapea los productos (productos.map)
-    - Se hace una función lambda prods -> envía al mapper toProducts le manda los prods
+    - Se hace una función lambda prods → envía al mapper toProducts le manda los prods
     - Él .map retorna un opcional de lo que se está haciendo dentro de la expresión
-    - El "arroy function" (prods) recibe los productos que tiene adentro y los convierte a products y los retorna */
+    - El "array function" (prods) recibe los productos que tiene adentro y los convierte a products y los retorna */
 
     @Override
     public Optional<Product> getProduct(int productId) {
