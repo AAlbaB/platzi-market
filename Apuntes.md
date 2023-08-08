@@ -18,7 +18,7 @@
    - La notación **@OneToMany**, relación de uno a muchos
    - La notación **@Repository**, para decirle a Spring que esa clase interactúa con BD
    - La notación **@Component**, para indicar que es un componente de Spring
-8. En este proyecto se usó "Crud Repository", para la creación CRUD de las entidades mediante interfaces, se crean en "persistence, crud"
+8. En este proyecto se usó "Crud Repository", para la creación CRUD de las entidades mediante interfaces, se crean en "persistence.crud"
 9. Se utilizó también "Query Methods" para las consultas en BD, más info: [Query Methods](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods), se crean en persistence
 10. Para implementar el patron "Data Mapper", lo usamos con "Map Struct": [Mapstruct](https://mapstruct.org/documentation/installation/), se debe colocar en el build.gradle e instalar el Plugin “MapStruct Support”
 11. En la carpeta "domain", se crea las clases para el patrón de data mapper
@@ -28,13 +28,13 @@
     - La notación **@Mappings** se colocan los **@Mappings**, se coloca desde donde hasta donde se va a llevar
     - La notación **@InheritInverseConfiguration** es para indicarle que se hará el mapeo contrario al mappings anterior
     - Si no quiero mapear algo colocamos **@Mapping(target = "Campo a ignorar", ignore = true)**
-14. Ahora orientamos los "Repository" (Los que están en persistence) al dominio ProductoRepository. Le colocamos el "implements ProductRepository"
+14. Ahora orientamos los "Repository" (Los que están en persistence) al dominio "ProductoRepository". Le colocamos el "implements ProductRepository"
     - En este punto se heredan los métodos del dominio, y se deben ajustar a lo que piden el dominio
     - La notación **@Override** significa que viene heredado de la implementación del dominio
     - Se pueden ir borrando los métodos iniciales e ir dejando solo los heredados
     - Al terminar el "ProductoRepository" queda enfocado al dominio en lugar de la tabla puntual
     - Esto evita que el proyecto se acople a una BD puntual, por ejemplo si se utiliza otro tipo de base de datos, solo se tendría que crear otro tipo mapper que convierta "Product" en la nueva colección
-15. Debemos colocar la notación **@Autowired** cuando se inicializa el mapper y el Crud repository en "ProductoRepository" de la persistencia. Se le da a entender a Spring que los objetos que reciban esta notación les debe crear las instancias, con esto ya no tenemos que crear objetos manualmente. Se debe tener cuidado de autowired, el objeto a inyectar es un objeto de spring, o sea, que tenga el componenteModel en spring. Con esto se finaliza los repositorios.
+15. Debemos colocar la notación **@Autowired** (En los Repository de persistence) cuando se inicializa el mapper y el Crud repository en "ProductoRepository" de la persistencia. Se le da a entender a Spring que los objetos que reciban esta notación les debe crear las instancias, con esto ya no tenemos que crear objetos manualmente. Se debe tener cuidado de autowired, el objeto a inyectar es un objeto de spring, o sea, que tenga el componenteModel en spring. Con esto se finaliza los repositorios.
 16. Ahora crearemos los servicios en "domain.service", como clases:
     - Se le debe colocar la notación **@Service**
     - Se implementa la interfaz
@@ -46,3 +46,7 @@
     - La notación **@PostMapping**, para peticiones tipo post
     - La notación **@RequestBody**, para indicarle que vendrá algo por medio del body
     - La notación **@DeleteMapping**, para peticiones tipo delete
+
+## Update
+- En el paso 14, al implementar los repositorios del dominio, aparece una sugerencia de implementar los métodos de esa interfaz. Pero es importante colocar la notación: **@Repository**
+- Luego hacemos el crud en "Persistence.crud". Ya con el crud creado, se le coloca en el repository con la notación **@Autowired** y se termina el código de los métodos
