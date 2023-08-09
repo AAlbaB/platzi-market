@@ -10,7 +10,7 @@
    - Siempre se debe colocar la notación **@Entity**, para dar a entender a JAVA que esta clase mapea una tabla en BD
    - La notación **@Table**, para colocar el nombre real de la tabla en BD
    - La notación **@Column**, para colocar el nombre real de la columna en BD
-   - La notación **@ID**, es para asignar que es la llave primaria de la tabla y **@GeneratedValue**, que se generará automáticamente
+   - La notación **@Id**, es para asignar que es la llave primaria de la tabla y **@GeneratedValue**, que se generará automáticamente
    - Para generar los getter and setter, clic derecho, "Generete", "Getter and Setter", seleccionarlos todos y Ok.
    - La notación **@EmbeddedId**, se utiliza para clave primaria compuesta y está dada por otra clase 
    - La notación **@ManyToOne**, relación de muchos a uno
@@ -51,8 +51,17 @@
     - implementation 'io.springfox:springfox-swagger-ui:3.0.0'
     - implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
     - springdoc.swagger-ui.path=/swagger-ui.html, se agrego en el application.properties
-19. Creamos la clase de Java "SwaggerConfig" en "web.config", dentro de los controladores podemos colocar las notaciones **@Operation**, **@ApiResponse** y **@ApiParam**, para dar más detalle. Ver (https://springdoc.org/) (Revisar más a fondo estas implementaciones y notaciones)
-20. La documentación queda en: "http://localhost:8090/platzi-market/api/swagger-ui/index.html"
+19. Creamos la clase de Java "SwaggerConfig" en "web.config", dentro de los controladores podemos colocar las notaciones **@Operation**, **@ApiResponse** y **@ApiParam**, para dar más detalle. Ver (https://springdoc.org/ Revisar más a fondo estas implementaciones y notaciones)
+20. La documentación queda en: http://localhost:8090/platzi-market/api/swagger-ui/index.html
+21. Para desplegar nuestra aplicación por comandos:
+    - Vamos a "build.grandle" y cambiamos el número de versión que vayamos a usar y actualizamos los cambios de gradle (Botón flotante)
+    - Al lado derecho damos en gradle, en la aplicación, Tasks, build y doble clic en bootJar, con esto generamos nuestra aplicación autocontenida
+    - Al terminar el proceso se crea la aplicación en: "platzi-market\build\libs"
+    - Para ejecutar la app, desde Bash estando en la carpeta de la app (Apuntando en PDN): `java -jar -Dspring.profiles.active=pdn build/libs/platzi-market-1.0.jar`
+22. Para el despliegue en Heroku (Revisar en las demás):
+    - En el archivo: "application-pdn.properties", se colocan las variables de entorno asignadas para el puerto y la BD (Se dejaron comentadas)
+    - Se creó el archivo "system.properties" en la raíz del proyecto para indicar la versión de Java a ejecutar
+    - Se creó el archivo "Procfile" en la raíz del proyecto para indicar el perfil a ejecutar
 
 ## Update
 - En el paso 14, al implementar los repositorios del dominio, aparece una sugerencia de implementar los métodos de esa interfaz. Pero es importante colocar la notación: **@Repository**
