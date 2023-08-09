@@ -46,6 +46,13 @@
     - La notación **@PostMapping**, para peticiones tipo post
     - La notación **@RequestBody**, para indicarle que vendrá algo por medio del body
     - La notación **@DeleteMapping**, para peticiones tipo delete
+18. Para documentar nuestra API con Swagger, primero debemos añadir la dependencia en "build.grandle", buscamos: "SpringFox Swagger2" y "SpringFox Swagger UI", se agregaron:
+    - implementation 'io.springfox:springfox-swagger2:3.0.0'
+    - implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+    - implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+    - springdoc.swagger-ui.path=/swagger-ui.html, se agrego en el application.properties
+19. Creamos la clase de Java "SwaggerConfig" en "web.config", dentro de los controladores podemos colocar las notaciones **@Operation**, **@ApiResponse** y **@ApiParam**, para dar más detalle. Ver (https://springdoc.org/) (Revisar más a fondo estas implementaciones y notaciones)
+20. La documentación queda en: "http://localhost:8090/platzi-market/api/swagger-ui/index.html"
 
 ## Update
 - En el paso 14, al implementar los repositorios del dominio, aparece una sugerencia de implementar los métodos de esa interfaz. Pero es importante colocar la notación: **@Repository**
